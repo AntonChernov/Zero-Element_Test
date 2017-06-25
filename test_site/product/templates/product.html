@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div>
+        {{ data.product.name }}
+    </div>
+    <div>
+        {{ data.product.description }}
+    </div>
+    <div>
+        {{ data.product.price }}
+    </div>
+    <div class="col-md-2">
+        <p>Liks {{ data.likes }}</p>
+    </div>
+    <p id="msg"></p>
+    <div class="col-md-12">
+        {% if data.user.is_authenticated %}
+            {% if data.banned %}
+                <p>Користувача було забанено!</p>
+            {% else %}
+                <div class="col-md-3">
+                    <button type="button" onclick="">Add like</button>
+                </div>
+                <div class="col-md-3">
+                    {% for i in data.comments %}
+                        <p>{{ i.user_name }}</p>
+                        <p>{{ i.comment_text }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <script>
+        var AddLike = function () {
+            $.ajax({
+                url:"",
+                type:"GET"
+                success: function(msg){
+                 $('#msg').append(msg);
+                    },
+              error: function(msg){
+                 $('#msg').append(msg);
+              }
+            })
+        }
+    </script>
+
+{% endblock %}

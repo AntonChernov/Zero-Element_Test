@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div>
+        <script type="text/javascript">
+           var TestUsername = function () {
+                 $.ajax({
+                  url: "/products/is_username/"+ $('#b1').val()+"/",
+                  type: "GET",
+                  success: function(data){
+                     $('#error_val').append(data.msg);
+                  },
+                  error: function(data){
+                     $('#error_val').append(data.msg);
+                    }
+
+                    }
+                );
+            }
+        </script>
+        <div class="col-md-8 col-lg-2">
+            <form class="form-control" action="/products/register/" method="post">
+                <input placeholder="Ім’я користавача" type="text" name="username" value="" id="b1"><p id="error_val"></p>
+                <br>
+                <input placeholder="Пароль користувача" type="password" name="password" value="">
+                <br>
+                <input placeholder="ПІБ" type="text" name="fullname" value="">
+                <br>
+                <select>
+                    {% for i in gender %}
+                        <option>{{ i.gender }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <button type="submit">Реєстрація</button>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <button type="button" onclick="TestUsername()">Перевірити ім’я користувача на доступність</button>
+        </div>
+    </div>
+{% endblock %}

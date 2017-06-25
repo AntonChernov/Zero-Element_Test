@@ -1,0 +1,52 @@
+{#<script>#}
+{#    var IdFunc = function (id) {#}
+{#        $.ajax({#}
+{#              url: "/products/product/"+id+"/",#}
+{#              type: "GET",#}
+{#              success: function(msg){#}
+{#                 $('#insert_div').append(msg);#}
+{#              },#}
+{#              error: function(msg){#}
+{#                 console.log('Ошибка');#}
+{#              }#}
+{##}
+{#           }#}
+{#        );#}
+{#    }#}
+{##}
+{##}
+{#</script>#}
+{% extends 'main.html' %}
+{% block content %}
+    {% for i in data.items %}
+        <div class="form-control">
+            <form action="/products/product/{{ i.id }}/">
+            <div>
+                <p>{{ i.name }}</p>
+                <p>{{ i.price }}</p>
+                <div>
+                    <button type="submit" class="btn btn-primary" >Детально</button>
+                </div>
+            </div>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>
+    {% endfor %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if data.products_page.has_previous %}
+                <a href="?page={{ data.products_page.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ data.products_page.number }} of {{ data.products_page.paginator.num_pages }}.
+            </span>
+
+            {% if data.products_page.has_next %}
+                <a href="?page={{ data.products_page.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
