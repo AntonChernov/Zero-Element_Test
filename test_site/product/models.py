@@ -17,7 +17,7 @@ class Products(models.Model):
         db_table = 'product_list'
         verbose_name_plural = 'Продукти'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.product_name
 
     def as_dict(self):
@@ -49,7 +49,7 @@ class Consumers(models.Model):
         db_table = 'consumers'
         verbose_name_plural = 'Споживачі'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username
 
     def as_dict(self):
@@ -73,7 +73,7 @@ class Comments(models.Model):
         db_table = 'comments'
         verbose_name_plural = 'Коментарі'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.product.name
 
     def as_dict(self):
@@ -96,7 +96,7 @@ class Like(models.Model):
         db_table = 'products_like'
         verbose_name_plural = 'Продукти які подобаються'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.product.name
 
     def as_dict(self):
